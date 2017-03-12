@@ -20,5 +20,8 @@
 	<classpathentry kind="lib" path="C:/Users/John/Desktop/john/bgu/dsps/hadoop-2.7.1/hadoop-2.7.1/share/hadoop/common/lib/guava-11.0.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/John/Desktop/john/bgu/dsps/hadoop-2.7.1/hadoop-2.7.1/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/John/Desktop/john/bgu/dsps/hadoop-2.7.1/hadoop-2.7.1/share/hadoop/tools/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Dropbox/bgu/assignment2/aws-java-sdk-1.11.104/aws-java-sdk-1.11.104/lib/aws-java-sdk-1.11.104.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Dropbox/bgu/assignment2/aws-java-sdk-1.11.104/aws-java-sdk-1.11.104/lib/aws-java-sdk-1.11.104-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/John/Dropbox/bgu/assignment2/aws-java-sdk-1.11.104/aws-java-sdk-1.11.104/lib/aws-java-sdk-1.11.104-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
