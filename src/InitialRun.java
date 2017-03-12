@@ -25,7 +25,6 @@ public static class MapClass extends MapReduceBase implements Mapper<LongWritabl
       String[] tokenValues = value.toString().split("\t"); 
       String pair = tokenValues[0];
       
-      LOG.info("Pair: " + pair);
       int year = Integer.parseInt(tokenValues[1]);
       int decade = year - (year % 10);
       
@@ -37,8 +36,8 @@ public static class MapClass extends MapReduceBase implements Mapper<LongWritabl
       if(!isValid(firstWord) || !isValid(secondWord)) return;    
       
       // Check if we need StopWords
-      // 1 ==> We NOT including the Stop Words, and we MESANENIM! (filter)
-      if(isStopWords.equals("1") &&  (stopWords.contains(firstWord.toLowerCase()) ||  stopWords.contains(secondWord.toLowerCase()))) return;
+      // 0 ==> We NOT including the Stop Words, and we MESANENIM! (filter)
+      if(isStopWords.equals("0") &&  (stopWords.contains(firstWord.toLowerCase()) ||  stopWords.contains(secondWord.toLowerCase()))) return;
     	 
       Text outputText = new Text(firstWord + " " + secondWord + " " + decade);
       IntWritable countInt = new IntWritable(Integer.parseInt(tokenValues[2]));

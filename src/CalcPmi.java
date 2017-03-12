@@ -14,6 +14,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
 
 public class CalcPmi {
+	private static final String MAIN_DEL = "#";
+	private static final String SPACE_DEL = " ";
 	public static class MapperClass extends MapReduceBase implements Mapper<Text, Text, Text, DoubleWritable> {
 
 		public static HashMap<String, String> decade_to_N = null;
@@ -21,24 +23,25 @@ public class CalcPmi {
 		private Path localCachePath;
 
 		@Override
-		public void map(Text bigramsAndDecade, Text counters, OutputCollector<Text, DoubleWritable> output,
+		public void map(Text key, Text counters, OutputCollector<Text, DoubleWritable> output,
 				Reporter reporter) throws IOException {
 
-			String decade = bigramsAndDecade.toString().split(" ")[2];
+			String decade = key.toString().split(SPACE_DEL)[2];
 			int N = Integer.parseInt(MapperClass.decade_to_N.get(decade));
 
-			String[] data_fields = counters.toString().split("/t");
+			String[] parsedData = counters.toString().split(MAIN_DEL);
 
-			int bigramCount = Integer.parseInt(data_fields[0]);
-			int c_w_1 = Integer.parseInt(data_fields[1]);
-			int c_w_2 = Integer.parseInt(data_fields[2]);
+			int bigramCount = Integer.parseInt(parsedData[0]);
+			int c_w_1 = Integer.parseInt(parsedData[1]);
+			int c_w_2 = Integer.parseInt(parsedData[2]);
 
 			double pmi = Math.log(bigramCount) + Math.log(N) - Math.log(c_w_1) - Math.log(c_w_2);
 
-			output.collect(bigramsAndDecade, new DoubleWritable(pmi));
+			output.collect(key, new DoubleWritable(pmi));
 
 		}
 
+	
 		@Override
 		public void configure(JobConf job) {
 			try {
@@ -73,6 +76,7 @@ public class CalcPmi {
 
 	public static void main(String[] args) throws IOException, URISyntaxException {
 
+		System.out.println("args[2]:" + args[2]);
 		Configuration conf = new Configuration();
 
 		JobConf jobConf = new JobConf(conf);

@@ -16,6 +16,9 @@ import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.mapred.*;
 
 public class PMIFilter {
+	private static final String MAIN_DEL = "#";
+	private static final String SPACE_DEL = " ";
+	
 	public static class MapperClass extends MapReduceBase implements Mapper<Text, Text, Text, DoubleWritable> {
 
 		private static double minPMI = 0;
@@ -27,7 +30,7 @@ public class PMIFilter {
 		public void map(Text dataset, Text data, OutputCollector<Text, DoubleWritable> output, Reporter reporter)
 				throws IOException {
 
-			String decade = dataset.toString().split(" ")[2];
+			String decade = dataset.toString().split(SPACE_DEL)[2];
 
 			double pmi = Double.parseDouble(data.toString());
 			double sum = Double.parseDouble(MapperClass.sum_values.get(decade));

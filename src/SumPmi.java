@@ -8,12 +8,14 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.*;
 
 public class SumPmi {
+	private static final String MAIN_DEL = "#";
+	private static final String SPACE_DEL = " ";
 	public static class MapperClass extends MapReduceBase implements Mapper<Text, Text, Text, DoubleWritable> {
 
 		@Override
 		public void map(Text dataset, Text pmi, OutputCollector<Text, DoubleWritable> output, Reporter reporter)
 				throws IOException {
-			String decade = dataset.toString().split(" ")[2];
+			String decade = dataset.toString().split(SPACE_DEL)[2];
 			double pmi_value = Double.parseDouble(pmi.toString());
 			output.collect(new Text(decade), new DoubleWritable(pmi_value));
 
